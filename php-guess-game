@@ -1,0 +1,58 @@
+<?php
+$oldguess = "";
+$message = false;
+
+session_start();
+
+if (! isset ($_SESSION['randomnumber'])) {
+    $_SESSION['randomnumber'] = rand(1,100);
+}
+
+if (isset($_POST['guess'])) {
+    $oldguess = $_POST['guess'] + 0;
+    if ($_POST['guess'] == $_SESSION['randomnumber']) {
+        $message = " Aferin Buldun! Tekrar oynamak için yeni sayı girişi yap!";
+        session_unset();
+    } else if ($_POST['guess'] < $_SESSION['randomnumber']) {
+        $message = "Tahmin düşük, biraz yükseltmeyi dene";
+    } else {
+        $message = "Tahmin yüksek, biraz azaltmayı dene";
+    }
+}
+
+?>
+
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahmin Oyunu</title>
+</head>
+
+<body>
+
+    <h1>Tahmin Oyunu</h1>
+    <p>Bir sayı tuttum, tahmin etmeye çalış.</p>
+
+
+
+    <form action="" method="POST">
+        <p>
+            <label for="guess">Tahmininizi Giriniz</label>
+            <input type="text" name="guess" id="guess" size=35 value="<?= htmlentities($oldguess) ?>">
+        </p>
+        <input type="submit" value="Dene">
+    </form>
+
+
+    <?php
+    if ($message !== false) {
+        echo ("<p><b>$message</b></p>");
+    }
+    ?>
+
+
+</body>
+
+</html>
