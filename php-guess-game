@@ -11,38 +11,38 @@ if (! isset ($_SESSION['randomnumber'])) {
 if (isset($_POST['guess'])) {
     $oldguess = $_POST['guess'] + 0;
     if ($_POST['guess'] == $_SESSION['randomnumber']) {
-        $message = " Aferin Buldun! Tekrar oynamak için yeni sayı girişi yap!";
+        $message = " Well done, insert new guess to keep playing";
         session_unset();
     } else if ($_POST['guess'] < $_SESSION['randomnumber']) {
-        $message = "Tahmin düşük, biraz yükseltmeyi dene";
+        $message = "Guess is too low";
     } else {
-        $message = "Tahmin yüksek, biraz azaltmayı dene";
+        $message = "Guess is too high";
     }
 }
 
 ?>
 
-<html lang="tr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tahmin Oyunu</title>
+    <title>A Gues Game</title>
 </head>
 
 <body>
 
-    <h1>Tahmin Oyunu</h1>
-    <p>Bir sayı tuttum, tahmin etmeye çalış.</p>
+    <h1>Guess Game</h1>
+    <p>What is the number that I have picked ?</p>
 
 
 
     <form action="" method="POST">
         <p>
-            <label for="guess">Tahmininizi Giriniz</label>
+            <label for="guess">Enter your guess:</label>
             <input type="text" name="guess" id="guess" size=35 value="<?= htmlentities($oldguess) ?>">
         </p>
-        <input type="submit" value="Dene">
+        <input type="submit" value="Try">
     </form>
 
 
